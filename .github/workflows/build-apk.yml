@@ -3,21 +3,21 @@ on: [push]
 
 jobs:
   compilar:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Obtener archivos
         uses: actions/checkout@v4
 
-      - name: Instalar Python 3.11
+      - name: Instalar Python 3.10
         uses: actions/setup-python@v5
         with:
-          python-version: '3.11'
+          python-version: '3.10'
 
       - name: Instalar herramientas necesarias
         run: |
           sudo apt update -y
-          sudo apt install -y openjdk-17-jdk build-essential git
-          python -m pip install --upgrade pip
+          sudo apt install -y openjdk-17-jdk build-essential git libffi-dev libssl-dev
+          python -m pip install --upgrade pip setuptools wheel
           pip install buildozer cython==0.29.37
 
       - name: Generar el APK
